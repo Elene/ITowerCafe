@@ -1,0 +1,51 @@
+﻿@model ITowerCafe.Data.Review
+
+@{
+    ViewBag.Title = "Review";
+}
+
+@using (Html.BeginForm(new { orderId = ViewBag.OrderId }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Review</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating.Value, "Rating", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Rating.Value, Model.Ratings, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Rating.Value, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment.TypeId, "Comment Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Comment.TypeId, Model.CommentTypes, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comment.TypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment.Id, "Comment Text", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Comment.Text, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comment.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

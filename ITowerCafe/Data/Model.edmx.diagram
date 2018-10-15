@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="911e2e69ac9b4579a451248f7035a0d5" Name="Diagram1">
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Comment" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.CommentType" Width="1.5" PointX="0.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Company" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.CompanyCostType" Width="1.5" PointX="1.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.CompanyType" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.MenuProduct" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.MenuProductsMap" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Menu" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.OrderDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Order" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.ProductCategory" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Product" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Rating" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITowerCafeDBModel.Review" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="ITowerCafeDBModel.Comments_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Reviews_FK3" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Companies_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Companies_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Menus_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Orders_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.MenuProducts_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.MenuProducts_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.MenuProductsMap_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.OrderDetails_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.MenuProductsMap_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.OrderDetails_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Reviews_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="ITowerCafeDBModel.Reviews_FK2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

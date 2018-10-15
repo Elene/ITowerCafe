@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ITowerCafeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CommentType" Relationship="Self.Comments_FK2" FromRole="Comments" ToRole="CommentTypes" />
+    <NavigationProperty Name="Reviews" Relationship="Self.Reviews_FK3" FromRole="Comments" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="CommentType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.Comments_FK2" FromRole="CommentTypes" ToRole="Comments" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LogoUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="CostId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CompanyType" Relationship="Self.Companies_FK1" FromRole="Companies" ToRole="CompanyTypes" />
+    <NavigationProperty Name="CompanyCostType" Relationship="Self.Companies_FK2" FromRole="Companies" ToRole="CompanyCostTypes" />
+    <NavigationProperty Name="Menus" Relationship="Self.Menus_FK1" FromRole="Companies" ToRole="Menus" />
+    <NavigationProperty Name="Orders" Relationship="Self.Orders_FK1" FromRole="Companies" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="CompanyCostType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.Companies_FK2" FromRole="CompanyCostTypes" ToRole="Companies" />
+  </EntityType>
+  <EntityType Name="CompanyType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.Companies_FK1" FromRole="CompanyTypes" ToRole="Companies" />
+  </EntityType>
+  <EntityType Name="MenuProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="PreparationTime" Type="Int32" Nullable="false" />
+    <Property Name="ProductCodeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.MenuProducts_FK1" FromRole="MenuProducts" ToRole="ProductCategories" />
+    <NavigationProperty Name="Product" Relationship="Self.MenuProducts_FK2" FromRole="MenuProducts" ToRole="Products" />
+    <NavigationProperty Name="MenuProductsMaps" Relationship="Self.MenuProductsMap_FK2" FromRole="MenuProducts" ToRole="MenuProductsMap" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.OrderDetails_FK2" FromRole="MenuProducts" ToRole="OrderDetails" />
+  </EntityType>
+  <EntityType Name="MenuProductsMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuId" Type="Int32" Nullable="false" />
+    <Property Name="MenuProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MenuProduct" Relationship="Self.MenuProductsMap_FK2" FromRole="MenuProductsMap" ToRole="MenuProducts" />
+    <NavigationProperty Name="Menu" Relationship="Self.MenuProductsMap_FK1" FromRole="MenuProductsMap" ToRole="Menus" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatorCompanyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Self.Menus_FK1" FromRole="Menus" ToRole="Companies" />
+    <NavigationProperty Name="MenuProductsMaps" Relationship="Self.MenuProductsMap_FK1" FromRole="Menus" ToRole="MenuProductsMap" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MenuProduct" Relationship="Self.OrderDetails_FK2" FromRole="OrderDetails" ToRole="MenuProducts" />
+    <NavigationProperty Name="Order" Relationship="Self.OrderDetails_FK1" FromRole="OrderDetails" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Self.Orders_FK1" FromRole="Orders" ToRole="Companies" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.OrderDetails_FK1" FromRole="Orders" ToRole="OrderDetails" />
+    <NavigationProperty Name="Reviews" Relationship="Self.Reviews_FK1" FromRole="Orders" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MenuProducts" Relationship="Self.MenuProducts_FK1" FromRole="ProductCategories" ToRole="MenuProducts" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MenuProducts" Relationship="Self.MenuProducts_FK2" FromRole="Products" ToRole="MenuProducts" />
+  </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Value" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reviews" Relationship="Self.Reviews_FK2" FromRole="Ratings" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="RatingId" Type="Int32" Nullable="false" />
+    <Property Name="CommentId" Type="Int32" />
+    <NavigationProperty Name="Comment" Relationship="Self.Reviews_FK3" FromRole="Reviews" ToRole="Comments" />
+    <NavigationProperty Name="Order" Relationship="Self.Reviews_FK1" FromRole="Reviews" ToRole="Orders" />
+    <NavigationProperty Name="Rating" Relationship="Self.Reviews_FK2" FromRole="Reviews" ToRole="Ratings" />
+  </EntityType>
+  <Association Name="Comments_FK2">
+    <End Role="CommentTypes" Type="Self.CommentType" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommentTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reviews_FK3">
+    <End Role="Comments" Type="Self.Comment" Multiplicity="0..1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="CommentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Companies_FK1">
+    <End Role="CompanyTypes" Type="Self.CompanyType" Multiplicity="1" />
+    <End Role="Companies" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Companies">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Companies_FK2">
+    <End Role="CompanyCostTypes" Type="Self.CompanyCostType" Multiplicity="1" />
+    <End Role="Companies" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyCostTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Companies">
+        <PropertyRef Name="CostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Menus_FK1">
+    <End Role="Companies" Type="Self.Company" Multiplicity="1" />
+    <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Menus">
+        <PropertyRef Name="CreatorCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Orders_FK1">
+    <End Role="Companies" Type="Self.Company" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuProducts_FK1">
+    <End Role="ProductCategories" Type="Self.ProductCategory" Multiplicity="1" />
+    <End Role="MenuProducts" Type="Self.MenuProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuProducts">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuProducts_FK2">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="MenuProducts" Type="Self.MenuProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuProducts">
+        <PropertyRef Name="ProductCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuProductsMap_FK2">
+    <End Role="MenuProducts" Type="Self.MenuProduct" Multiplicity="1" />
+    <End Role="MenuProductsMap" Type="Self.MenuProductsMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuProducts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuProductsMap">
+        <PropertyRef Name="MenuProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderDetails_FK2">
+    <End Role="MenuProducts" Type="Self.MenuProduct" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuProducts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuProductsMap_FK1">
+    <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
+    <End Role="MenuProductsMap" Type="Self.MenuProductsMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuProductsMap">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderDetails_FK1">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reviews_FK1">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reviews_FK2">
+    <End Role="Ratings" Type="Self.Rating" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ratings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="RatingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ITowerCafeDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="CommentTypes" EntityType="Self.CommentType" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="CompanyCostTypes" EntityType="Self.CompanyCostType" />
+    <EntitySet Name="CompanyTypes" EntityType="Self.CompanyType" />
+    <EntitySet Name="MenuProducts" EntityType="Self.MenuProduct" />
+    <EntitySet Name="MenuProductsMaps" EntityType="Self.MenuProductsMap" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Ratings" EntityType="Self.Rating" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
+    <AssociationSet Name="Comments_FK2" Association="Self.Comments_FK2">
+      <End Role="CommentTypes" EntitySet="CommentTypes" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="Reviews_FK3" Association="Self.Reviews_FK3">
+      <End Role="Comments" EntitySet="Comments" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="Companies_FK1" Association="Self.Companies_FK1">
+      <End Role="CompanyTypes" EntitySet="CompanyTypes" />
+      <End Role="Companies" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="Companies_FK2" Association="Self.Companies_FK2">
+      <End Role="CompanyCostTypes" EntitySet="CompanyCostTypes" />
+      <End Role="Companies" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="Menus_FK1" Association="Self.Menus_FK1">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="Menus" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="Orders_FK1" Association="Self.Orders_FK1">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="MenuProducts_FK1" Association="Self.MenuProducts_FK1">
+      <End Role="ProductCategories" EntitySet="ProductCategories" />
+      <End Role="MenuProducts" EntitySet="MenuProducts" />
+    </AssociationSet>
+    <AssociationSet Name="MenuProducts_FK2" Association="Self.MenuProducts_FK2">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="MenuProducts" EntitySet="MenuProducts" />
+    </AssociationSet>
+    <AssociationSet Name="MenuProductsMap_FK2" Association="Self.MenuProductsMap_FK2">
+      <End Role="MenuProducts" EntitySet="MenuProducts" />
+      <End Role="MenuProductsMap" EntitySet="MenuProductsMaps" />
+    </AssociationSet>
+    <AssociationSet Name="OrderDetails_FK2" Association="Self.OrderDetails_FK2">
+      <End Role="MenuProducts" EntitySet="MenuProducts" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="MenuProductsMap_FK1" Association="Self.MenuProductsMap_FK1">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="MenuProductsMap" EntitySet="MenuProductsMaps" />
+    </AssociationSet>
+    <AssociationSet Name="OrderDetails_FK1" Association="Self.OrderDetails_FK1">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="Reviews_FK1" Association="Self.Reviews_FK1">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="Reviews_FK2" Association="Self.Reviews_FK2">
+      <End Role="Ratings" EntitySet="Ratings" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
