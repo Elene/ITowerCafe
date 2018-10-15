@@ -1,0 +1,4 @@
+SET IDENTITY_INSERT [dbo].[Companies] ON
+INSERT INTO [dbo].[Companies] ([Id], [Name], [Description], [LogoUrl], [TypeId], [CostId], [CreateDate]) VALUES (2008, N'Subway', N'Casual counter-serve chain for build-your-own sandwiches & salads.', N'https://www.subway.com/~/media/Base_English/Images/Branding/subway-logo-new-1200x630.png', 1, 1, NULL)
+INSERT INTO [dbo].[Companies] ([Id], [Name], [Description], [LogoUrl], [TypeId], [CostId], [CreateDate]) VALUES (2009, N'Restaurant Meama', N'Meama is a Georgian restaurant, located in very historical heart of capital. Incredible atmosphere created by Traditional Georgian dishes, wine and stunning views of Tbilisi will keep you coming.', N'https://cdn1.vectorstock.com/i/1000x1000/36/00/fork-leaf-restaurant-eco-logo-vector-19313600.jpg', 8, 2, NULL)
+SET IDENTITY_INSERT [dbo].[Companies] OFF
