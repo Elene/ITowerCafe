@@ -125,23 +125,6 @@ INSERT INTO [dbo].[Orders] ([Id], [Cost], [Date], [Status], [UserId], [CompanyId
 SET IDENTITY_INSERT [dbo].[Orders] OFF
 
 ---
-CREATE TABLE [dbo].[OrderDetails] (
-    [Id]        INT IDENTITY (1, 1) NOT NULL,
-    [OrderId]   INT NOT NULL,
-    [ProductId] INT NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [OrderDetails_FK1] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Orders] ([Id]),
-    CONSTRAINT [OrderDetails_FK2] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[MenuProducts] ([Id])
-);
-
----
-SET IDENTITY_INSERT [dbo].[OrderDetails] ON
-INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3002, 2002, 4002)
-INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3003, 2002, 4003)
-INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3004, 2003, 4004)
-SET IDENTITY_INSERT [dbo].[OrderDetails] OFF
-
----
 CREATE TABLE [dbo].[Menus] (
     [Id]               INT IDENTITY (1, 1) NOT NULL,
     [CreatorCompanyId] INT NOT NULL,
@@ -192,6 +175,23 @@ INSERT INTO [dbo].[MenuProductsMap] ([Id], [MenuId], [MenuProductId]) VALUES (30
 INSERT INTO [dbo].[MenuProductsMap] ([Id], [MenuId], [MenuProductId]) VALUES (3004, 2003, 4004)
 SET IDENTITY_INSERT [dbo].[MenuProductsMap] OFF
 
+
+---
+CREATE TABLE [dbo].[OrderDetails] (
+    [Id]        INT IDENTITY (1, 1) NOT NULL,
+    [OrderId]   INT NOT NULL,
+    [ProductId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [OrderDetails_FK1] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Orders] ([Id]),
+    CONSTRAINT [OrderDetails_FK2] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[MenuProducts] ([Id])
+);
+
+---
+SET IDENTITY_INSERT [dbo].[OrderDetails] ON
+INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3002, 2002, 4002)
+INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3003, 2002, 4003)
+INSERT INTO [dbo].[OrderDetails] ([Id], [OrderId], [ProductId]) VALUES (3004, 2003, 4004)
+SET IDENTITY_INSERT [dbo].[OrderDetails] OFF
 
 ---
 CREATE TABLE [dbo].[Ratings] (
